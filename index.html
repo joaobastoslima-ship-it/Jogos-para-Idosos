@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caminho das Memórias Guardadas - Jogo de Tabuleiro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Cabeçalho Principal -->
+    <header class="header">
+        <div class="container">
+            <div class="badge">Jogo Interativo de Aterramento & Afeto</div>
+            <h1>Caminho das Memórias Guardadas</h1>
+            <p class="subtitle">Um jogo calmo e acolhedor para conectar gerações, estimular a memória e trazer paz ao momento presente.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Dashboard de Status do Jogo -->
+        <section class="game-dashboard">
+            <div class="dashboard-card status-card">
+                <h3>Vez do Jogador</h3>
+                <div class="current-player" id="currentPlayerDisplay">
+                    <span class="player-dot p1-bg"></span>
+                    <span id="playerName">Jogador 1 (Azul)</span>
+                </div>
+                <button id="rollDiceBtn" class="btn btn-primary">🎲 Rolar Dado</button>
+            </div>
+
+            <div class="dashboard-card dice-card">
+                <h3>Resultado do Dado</h3>
+                <div class="dice-display" id="diceResult">--</div>
+                <p class="dice-instruction">Aperte o botão para girar</p>
+            </div>
+
+            <div class="dashboard-card prompt-card">
+                <h3>Carta do Momento / Missão</h3>
+                <div class="prompt-box" id="promptBox">
+                    <p class="prompt-title">Pronto para começar!</p>
+                    <p class="prompt-text">Clique em "Rolar Dado" para dar o primeiro passo no caminho do jardim.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabuleiro Visual do Jogo -->
+        <section class="board-section">
+            <div class="section-title">
+                <h2>Tabuleiro do Jardim</h2>
+                <p>Acompanhe o percurso de cada peça pelas 15 estações de memórias e tranquilidade.</p>
+            </div>
+
+            <div class="board-grid" id="boardGrid">
+                <div class="tile tile-start" data-tile="1">
+                    <span class="tile-number">1</span>
+                    <span class="tile-icon">🏡</span>
+                    <span class="tile-label">Início</span>
+                    <div class="player-tokens" id="tokens-1">
+                        <div class="token p1-token" id="token-p1"></div>
+                        <div class="token p2-token" id="token-p2"></div>
+                    </div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="2">
+                    <span class="tile-number">2</span>
+                    <span class="tile-icon">📻</span>
+                    <span class="tile-label">Uma Cantiga</span>
+                    <div class="player-tokens" id="tokens-2"></div>
+                </div>
+
+                <div class="tile" data-tile="3">
+                    <span class="tile-number">3</span>
+                    <span class="tile-icon">🍃</span>
+                    <span class="tile-label">Respiro</span>
+                    <div class="player-tokens" id="tokens-3"></div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="4">
+                    <span class="tile-number">4</span>
+                    <span class="tile-icon">🍰</span>
+                    <span class="tile-label">Sabor Saudoso</span>
+                    <div class="player-tokens" id="tokens-4"></div>
+                </div>
+
+                <div class="tile" data-tile="5">
+                    <span class="tile-number">5</span>
+                    <span class="tile-icon">🌸</span>
+                    <span class="tile-label">Pausa</span>
+                    <div class="player-tokens" id="tokens-5"></div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="6">
+                    <span class="tile-number">6</span>
+                    <span class="tile-icon">🤝</span>
+                    <span class="tile-label">Um Bom Amigo</span>
+                    <div class="player-tokens" id="tokens-6"></div>
+                </div>
+
+                <div class="tile tile-rest" data-tile="7">
+                    <span class="tile-number">7</span>
+                    <span class="tile-icon">☕</span>
+                    <span class="tile-label">Hora do Chá</span>
+                    <div class="player-tokens" id="tokens-7"></div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="8">
+                    <span class="tile-number">8</span>
+                    <span class="tile-icon">🎈</span>
+                    <span class="tile-label">Dia de Festa</span>
+                    <div class="player-tokens" id="tokens-8"></div>
+                </div>
+
+                <div class="tile" data-tile="9">
+                    <span class="tile-number">9</span>
+                    <span class="tile-icon">🕊️</span>
+                    <span class="tile-label">Tranquilidade</span>
+                    <div class="player-tokens" id="tokens-9"></div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="10">
+                    <span class="tile-number">10</span>
+                    <span class="tile-icon">🛠️</span>
+                    <span class="tile-label">Primeiro Ofício</span>
+                    <div class="player-tokens" id="tokens-10"></div>
+                </div>
+
+                <div class="tile" data-tile="11">
+                    <span class="tile-number">11</span>
+                    <span class="tile-icon">🌿</span>
+                    <span class="tile-label">Ar Puro</span>
+                    <div class="player-tokens" id="tokens-11"></div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="12">
+                    <span class="tile-number">12</span>
+                    <span class="tile-icon">🚂</span>
+                    <span class="tile-label">Uma Viagem</span>
+                    <div class="player-tokens" id="tokens-12"></div>
+                </div>
+
+                <div class="tile tile-rest" data-tile="13">
+                    <span class="tile-number">13</span>
+                    <span class="tile-icon">🛋️</span>
+                    <span class="tile-label">Descanso</span>
+                    <div class="player-tokens" id="tokens-13"></div>
+                </div>
+
+                <div class="tile tile-memory" data-tile="14">
+                    <span class="tile-number">14</span>
+                    <span class="tile-icon">📖</span>
+                    <span class="tile-label">História Antiga</span>
+                    <div class="player-tokens" id="tokens-14"></div>
+                </div>
+
+                <div class="tile tile-finish" data-tile="15">
+                    <span class="tile-number">15</span>
+                    <span class="tile-icon">🌻</span>
+                    <span class="tile-label">Chegada!</span>
+                    <div class="player-tokens" id="tokens-15"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instruções -->
+        <section class="instructions-section">
+            <h2>Como Jogar com Idosos (Guia Prático)</h2>
+            <div class="cards-grid">
+                <div class="info-card">
+                    <div class="card-icon">1</div>
+                    <h3>Sem Pressa</h3>
+                    <p>O objetivo não é correr para vencer, mas desfrutar o caminho e conversar a cada parada.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">2</div>
+                    <h3>Ouça com Atenção</h3>
+                    <p>Quando cair em uma casa de memória, incentive o idoso a contar detalhes de suas lembranças sem interromper.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">3</div>
+                    <h3>Aterramento Suave</h3>
+                    <p>As casas de descanso servem para respirar fundo, relaxar os ombros e focar no conforto do ambiente.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Caminho das Memórias Guardadas • Desenvolvido para promover bem-estar, afeto e acessibilidade.</p>
+    </footer>
+
+</body>
+</html>
